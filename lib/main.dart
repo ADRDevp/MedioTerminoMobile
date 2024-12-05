@@ -26,8 +26,8 @@ class SplashScreen extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/logo.png', // Revisa la ruta del archivo
-              width: 200,
-              height: 200,
+              width: 600,
+              height: 600,
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -40,10 +40,10 @@ class SplashScreen extends StatelessWidget {
               child: Text('Start'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 150, vertical: 15),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 14),
             ElevatedButton(
               onPressed: () {
                 // Salir de la aplicación
@@ -52,7 +52,7 @@ class SplashScreen extends StatelessWidget {
               child: Text('Salir'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
-                padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 150, vertical: 15),
               ),
             ),
           ],

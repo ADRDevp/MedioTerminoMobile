@@ -14,8 +14,8 @@ class HomeScreen extends StatelessWidget {
             // Imagen agregada aquí
             Image.asset(
               'assets/images/logo.png',
-              width: 150, // Ajusta el tamaño según sea necesario
-              height: 150,
+              width: 600, // Ajusta el tamaño según sea necesario
+              height: 600,
             ),
             SizedBox(height: 20),
             Text(
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               child: Text('Start'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
               ),
             ),
             SizedBox(height: 20),
@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
               child: Text('Salir'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
               ),
             ),
           ],
