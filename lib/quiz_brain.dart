@@ -38,6 +38,8 @@ class QuizBrain {
     ),
   ];
 
+  List<Question> get questionBank => _questionBank;
+
   void addOneToTheScore() {
     _score++;
   }
@@ -62,6 +64,8 @@ class QuizBrain {
   }
 
   int scoreGetter() => _score;
+
+  int get questionNumberGetter => _questionNumber;
 
   // Obtiene el texto de la pregunta actual
   String questionTextGetter() => _questionBank[_questionNumber].questionText;

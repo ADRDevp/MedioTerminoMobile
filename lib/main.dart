@@ -1,131 +1,78 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'quiz_page.dart';
 
-QuizBrain quizBrain = QuizBrain();
+void main() => runApp(MyApp());
 
-void main() => runApp(Quizzler());
-
-class Quizzler extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: QuizPage(),
-          ),
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(), // Pantalla inicial
+    );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/logo.png', // Revisa la ruta del archivo
+              width: 200,
+              height: 200,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
+              child: Text('Start'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
+              ),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                // Salir de la aplicación
+                Navigator.pop(context);
+              },
+              child: Text('Salir'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                padding: EdgeInsets.symmetric(horizontal: 120, vertical: 15),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class QuizPage extends StatefulWidget {
-  @override
-  _QuizPageState createState() => _QuizPageState();
-}
-
-class _QuizPageState extends State<QuizPage> {
-  List<Icon> icons = [];
-
-  void checkAnswer(String selectedAnswer) {
-    String correctAnswer = quizBrain.correctAnswerGetter();
-
-    setState(() {
-      if (selectedAnswer == correctAnswer) {
-        icons.add(Icon(
-          Icons.check,
-          color: Colors.green,
-        ));
-        quizBrain.addOneToTheScore();
-      } else {
-        icons.add(Icon(
-          Icons.close,
-          color: Colors.red,
-        ));
-      }
-
-      if (quizBrain.lastQuestion()) {
-        Alert(
-          context: context,
-          type: AlertType.none,
-          title: "Well Done",
-          desc: "Your score is: ${quizBrain.scoreGetter()} out of ${quizBrain.questionLengthGetter()}.",
-          buttons: [
-            DialogButton(
-              child: Text(
-                "Start Again",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-                setState(() {
-                  quizBrain.reset();
-                  icons.clear();
-                });
-              },
-              width: 120,
-            )
-          ],
-        ).show();
-      } else {
-        quizBrain.nextQuestion();
-      }
-    });
-  }
-
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          flex: 5,
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Center(
-              child: Text(
-                quizBrain.questionTextGetter(),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
+    return Scaffold(
+      backgroundColor: Colors.grey.shade900,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          child: QuizPage(), // Carga la página del quiz
         ),
-        // Generar botones dinámicos
-        ...quizBrain.optionsGetter().map((option) {
-          return Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(15.0),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                ),
-                child: Text(
-                  option,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                  ),
-                ),
-                onPressed: () {
-                  checkAnswer(option);
-                },
-              ),
-            ),
-          );
-        }).toList(),
-        Row(
-          children: icons,
-        ),
-      ],
+      ),
     );
   }
 }
